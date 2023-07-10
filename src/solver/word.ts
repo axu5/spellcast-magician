@@ -1,5 +1,6 @@
+import isLetter from "@/helpers/isLetter";
 import List from "./list";
-import { Tile } from "./tile";
+import { Tile, letterValues } from "./tile";
 import { tileProperties } from "./tileProperties";
 
 export default class Word {
@@ -28,6 +29,23 @@ export default class Word {
         }
 
         return gems;
+    }
+
+    public calculateSolePoints() {
+        let points = 0;
+        for (let i = 0; i < this.text.length; ++i) {
+            const ch = this.text[i];
+            if (!ch || !isLetter(ch)) {
+                continue;
+            }
+            points += letterValues[ch];
+        }
+
+        if (this.text.length >= 6) {
+            points += 10;
+        }
+
+        return points;
     }
 
     public calculatePoints() {
