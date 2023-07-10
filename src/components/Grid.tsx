@@ -49,6 +49,7 @@ const Grid: FC<GridProps> = ({
         const leftI = i;
 
         return async (event: KeyboardEvent<HTMLInputElement>) => {
+            event.preventDefault();
             const prevElement = document.getElementById(
                 `${prevI}-${prevJ}`
             );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import readyToSolve from "@/helpers/readyToSolve";
 import { Switch } from "./ui/switch";
@@ -32,7 +32,7 @@ const SpellcastInput = () => {
         useState<ValidWordType | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    useMemo(() => {
+    useEffect(() => {
         setIsLoading(true);
         const load = async () => {
             await board.load();

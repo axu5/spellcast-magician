@@ -56,22 +56,18 @@ const SpellcastInputLetter: FC<SpellcastInputLetterProps> = ({
                     className={cn(
                         "w-10 h-10 m-1 border-2 border-black",
                         {
-                            "bg-slate-200":
+                            "bg-slate-700 text-white":
                                 highlight && highlightStrength == 0,
-                            "bg-slate-300":
+                            "bg-slate-600 text-white":
                                 highlight && highlightStrength == 1,
-                            "bg-slate-400":
+                            "bg-slate-500 text-white":
                                 highlight && highlightStrength == 2,
-                            "bg-slate-500":
+                            "bg-slate-400":
                                 highlight && highlightStrength == 3,
-                            "bg-slate-600":
+                            "bg-slate-300":
                                 highlight && highlightStrength == 4,
-                            "bg-slate-700":
-                                highlight && highlightStrength == 5,
-                            "bg-slate-800":
-                                highlight && highlightStrength == 6,
-                            "bg-slate-900":
-                                highlight && highlightStrength >= 7,
+                            "bg-slate-200":
+                                highlight && highlightStrength >= 5,
                             "bg-purple-200":
                                 twoTimesLocation === `${i}-${j}`,
                             "border-red-500":

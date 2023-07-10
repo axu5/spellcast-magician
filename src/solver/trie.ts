@@ -16,12 +16,10 @@ export default class Trie {
             if (idx < 0 || idx > 26) {
                 continue;
             }
-
-            const tmp = node.childNodes[idx] ?? new TrieNode(ch);
-            node.childNodes[idx] = tmp;
-            node = tmp;
+            node.childNodes[idx] ??= new TrieNode(ch);
+            node = node.childNodes[idx]!;
+            node.isWord = i === word.length - 1 || node.isWord;
         }
-        node.isWord = true;
     }
 
     public insertWords(words: string[]) {
@@ -30,18 +28,27 @@ export default class Trie {
         }
     }
 
-    public search(word: string) {
+    public search(word: string, isPrefixSearch: boolean = false) {
         let node = this.root;
-        for (let i = 0; i < word.length; i++) {
-            const ch = word[i] as string;
+        for (let i = 0; i < word.length; ++i) {
+            const ch = word[i]!;
             const idx = charToNumber(ch);
             const tmp = node.childNodes[idx];
-            if (!tmp) {
+            if (
+                tmp == null ||
+                (!isPrefixSearch &&
+                    i == word.length - 1 &&
+                    !tmp.isWord)
+            ) {
                 return false;
             }
             node = tmp;
         }
 
-        return node.isWord;
+        return true;
+    }
+
+    public startsWith(prefix: string) {
+        return this.search(prefix, true);
     }
 }

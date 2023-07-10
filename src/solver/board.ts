@@ -75,6 +75,7 @@ export default class Board {
         if (!tile) {
             return;
         }
+        // Avoid looping over self
         for (let i = 0; i < word.tiles.length; ++i) {
             const tmp = word.tiles.get(i);
             if (!tmp) {
@@ -85,13 +86,13 @@ export default class Board {
             }
         }
 
-        // check whether current letter (at x, y) is the beginning of a word
+        // add current letter to word
         const text = word.text + tile.letter;
-        if (!this.trie.search(text)) {
+
+        if (!this.trie.startsWith(text)) {
             return;
         }
 
-        // add current letter to word
         word.addTile(tile);
         // check whether current letter (at x, y) is the end of a word
         if (this.trie.search(text)) {
@@ -105,7 +106,6 @@ export default class Board {
         // traverse all adjacent letters including diagonals
         // Horizontal
         this._traverseBoard(x - 1, y, word, node);
-
         this._traverseBoard(x + 1, y, word, node);
         // Vertical
         this._traverseBoard(x, y - 1, word, node);
