@@ -48,6 +48,14 @@ export default class Board {
         }
     }
 
+    public reset() {
+        for (let i = 0; i < 5; ++i) {
+            for (let j = 0; j < 5; ++j) {
+                this.tiles[i * 5 + j] = null;
+            }
+        }
+    }
+
     public setTile(
         x: number,
         y: number,

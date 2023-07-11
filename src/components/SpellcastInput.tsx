@@ -8,25 +8,27 @@ import Board, { ValidWordType } from "@/solver/board";
 import { tileProperties } from "@/solver/tileProperties";
 import { Button } from "./ui/button";
 import Grid from "./Grid";
+import isLetter from "@/helpers/isLetter";
 
 const width = 5;
 const height = 5;
 
 const SpellcastInput = () => {
+    const clearGrid = () => {
+        const rows = [];
+        for (let i = 0; i < height; ++i) {
+            rows.push(Array.from(Array(width), () => ""));
+        }
+        return rows;
+    };
     // In the format
     // dl-Y-X or tl-Y-X
     const [specialLetter, setSpecialLetter] = useState<string>("");
     const [twoTimesLocation, setTwoTimesLocation] =
         useState<string>("");
     const [arrowWrapAround, setArrowWrapAround] = useState(false);
-    const [grid, setGrid] = useState(() => {
-        const rows = [];
-        for (let i = 0; i < height; ++i) {
-            rows.push(Array.from(Array(width), () => ""));
-        }
-        return rows;
-    });
-    const [board, _setBoard] = useState(new Board());
+    const [grid, setGrid] = useState(clearGrid);
+    const [board, setBoard] = useState(new Board());
     const [bestWords, setBestWords] = useState<ValidWordType[]>([]);
     const [selectedWord, setSelectedWord] =
         useState<ValidWordType | null>(null);
@@ -134,6 +136,30 @@ const SpellcastInput = () => {
                     disabled={twoTimesLocation === ""}
                     onClick={() => setTwoTimesLocation("")}>
                     Clear 2x word
+                </Button>
+                <Button
+                    className='my-2'
+                    variant='destructive'
+                    disabled={
+                        !grid.some(row =>
+                            row.some(ch => isLetter(ch))
+                        )
+                    }
+                    onClick={() => {
+                        setGrid(clearGrid);
+                        setSpecialLetter("");
+                        setTwoTimesLocation("");
+                        setSelectedWord(null);
+                        setBestWords([]);
+                        setBoard(oldBoard => {
+                            oldBoard.reset();
+                            return oldBoard;
+                        });
+                        const firstInput =
+                            document.getElementById("0-0");
+                        firstInput?.focus();
+                    }}>
+                    Clear board
                 </Button>
             </div>
             <div>

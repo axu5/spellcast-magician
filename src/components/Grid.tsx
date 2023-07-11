@@ -49,6 +49,10 @@ const Grid: FC<GridProps> = ({
         const leftI = i;
 
         return async (event: KeyboardEvent<HTMLInputElement>) => {
+            const { key, shiftKey, ctrlKey, altKey } = event;
+            if (ctrlKey || altKey) {
+                return;
+            }
             event.preventDefault();
             const prevElement = document.getElementById(
                 `${prevI}-${prevJ}`
@@ -69,8 +73,6 @@ const Grid: FC<GridProps> = ({
             const leftElement = document.getElementById(
                 `${leftI}-${leftJ}`
             );
-
-            const { key, shiftKey } = event;
 
             if (key === "ArrowUp") {
                 upElement?.focus();
