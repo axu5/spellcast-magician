@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description:
         "Figure out the best move in spellcast for any position instantly!",
     icons: {
-        icon: "/spellcast.png",
+        icon: "/spellcast-magician.ico",
     },
     keywords: [
         "spellcast",
