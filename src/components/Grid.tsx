@@ -57,7 +57,6 @@ const Grid: FC<GridProps> = ({
             const prevElement = document.getElementById(
                 `${prevI}-${prevJ}`
             );
-            // const thisElement = document.getElementById(`${i}-${j}`);
             const nextElement = document.getElementById(
                 `${nextI}-${nextJ}`
             );
@@ -96,7 +95,19 @@ const Grid: FC<GridProps> = ({
                 } else {
                     nextElement?.focus();
                 }
-                return;
+            } else if (key === "Backspace") {
+                prevElement?.focus();
+                const newGrid = produce(grid, gridCopy => {
+                    const row = gridCopy[i];
+                    if (!row) {
+                        return gridCopy;
+                    }
+                    row[j] = "";
+                    return gridCopy;
+                });
+                setGrid(newGrid);
+            } else if (key === "Enter") {
+                downElement?.focus();
             }
 
             if (!isLetter(key)) {
