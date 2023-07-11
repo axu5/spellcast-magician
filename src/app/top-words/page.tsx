@@ -20,8 +20,10 @@ const Page = async () => {
     ).sort((a, b) => b.points - a.points);
 
     return (
-        <div className='text-center'>
-            <h1>Here is the dictionary in order of points:</h1>
+        <div className=''>
+            <h1 className='text-xl font-semibold py-5 mx-10'>
+                Here is the dictionary in order of points:
+            </h1>
 
             <WordDisplay words={wordsSorted} />
         </div>
