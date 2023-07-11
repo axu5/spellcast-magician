@@ -11,6 +11,15 @@ export const metadata: Metadata = {
     icons: {
         icon: "/spellcast.png",
     },
+    keywords: [
+        "spellcast",
+        "discord",
+        "activity",
+        "solver",
+        "hack",
+        "cheat",
+        "magician",
+    ],
 };
 
 export default function RootLayout({
@@ -20,6 +29,19 @@ export default function RootLayout({
 }) {
     return (
         <html lang='en'>
+            <head>
+                <link
+                    rel='icon'
+                    href='/spellcast-magician.ico'
+                    sizes='any'
+                />
+
+                {/* Google */}
+                <meta
+                    name='google-site-verification'
+                    content='X9LGH52btFxhOm64YQUNVdXVxJmmRj1h6KPftxq8e0o'
+                />
+            </head>
             <body className={inter.className}>{children}</body>
         </html>
     );
