@@ -177,11 +177,11 @@ const SpellcastInput = () => {
                                     "flex p-2 rounded-sm flex-row hover:underline hover:cursor-pointer hover:bg-zinc-200",
                                     {
                                         underline:
-                                            word.text ===
-                                            selectedWord?.word.text,
+                                            word ===
+                                            selectedWord?.word,
                                         "bg-zinc-200":
-                                            word.text ===
-                                            selectedWord?.word.text,
+                                            word ===
+                                            selectedWord?.word,
                                     }
                                 )}>
                                 <span className='font-mono mr-2'>
